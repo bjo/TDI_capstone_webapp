@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h2>{{ the_title }}</h2>
+
+<!-- POSTing to this method triggers /display, which corresponds to do_search() function in the webapp code -->
+<form method='POST' action='/display'>
+	<table>
+		<p>Use this form to submit a search request:</p>
+		<tr>
+			<td>Ticker:</td>
+			<td><input name='ticker' type='TEXT' width='60', value='GOOG'></td>
+		</tr>
+		<tr>
+			<td>Start date (YYYY-MM-DD):</td>
+			<td><input name='startdate' type='TEXT' width='60', value='2019-12-21'></td>
+		</tr>
+		<tr>
+			<td>End date (YYYY-MM-DD):</td>
+			<td><input name='enddate' type='TEXT' width='60', value='2021-03-19'></td>
+		</tr>
+	</table>
+	<p>When you're ready, click this button:</p>
+	<p><input value='Do it!' type='SUBMIT'></p>
+</form>
+
+{% endblock %}

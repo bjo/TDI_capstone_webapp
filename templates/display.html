@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    	<meta charset="utf-8">
+        <title>{{ the_title }}</title>
+        {{ the_resources|safe }}
+    	{{ the_data|safe }}
+        <link rel="stylesheet" href="static/hf.css" />
+        <style>
+            .embed-wrapper {
+                width: 50%;
+                height: 400px;
+                margin: auto;
+            }
+        </style>
+    </head>
+    <body>
+
+	<h2>{{ the_title }}</h2>
+
+	<p>You submitted the following data:</p>
+	<table>
+		<tr>
+			<td>Ticker:</td>
+			<td>{{ the_ticker }}</td>
+		</tr>
+		<tr>
+			<td>Start date:</td>
+			<td>{{ the_start_date }}</td>
+		</tr>
+		<tr>
+			<td>End date:</td>
+			<td>{{ the_end_date }}</td>
+		</tr>
+	</table>
+
+	<p>Closing prices for {{ the_ticker }}: </p>
+
+	<div class="embed-wrapper">
+	    {{ the_plot|safe }}
+	</div>
+
+	</body>
+</html>

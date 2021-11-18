@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+
+{% block head %}
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.8.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>
+{% endblock %}
+
+{% block body %}
+
+<h2>{{ the_title }}</h2>
+
+
+	<h3>The current state of US adult Behavior Risks:</h3>
+
+	<form action="{{ url_for('entry_page') }}" method="POST" id="var_selector">
+		Choose your variable of interest:<br>
+		<div>
+		<select NAME="dep_variable">
+			{% for elem in the_var_desc %}
+				<option VALUE="{{ elem }}">{{ the_var_desc[elem] }}
+			{% endfor %}
+<!--			<option VALUE="TOTINDA" SELECTED>lack of exercise-->
+<!--			<option VALUE="FLUSHOT">flu shot-->
+<!--			<option VALUE="HTCARE">lack of healthcare-->
+<!--			<option VALUE="RFSMOK">smoker-->
+		</select>
+		<br>
+		<input TYPE="submit" VALUE="Load">
+		</div>
+	</form>
+
+	<h3>Current variable loaded: {{the_var_desc[the_var]}}</h3>
+
+	<table>
+		<!-- First row -->
+		<tr>
+			<!-- First entry: Covariate -->
+			<th>
+				<h3>CDC survey covariate</h3>
+				<table>
+					<tr>
+						<div id="vis1">
+							<script>
+								var spec1 = {{ the_charts[0] | safe }};
+								vegaEmbed("#vis1", spec1);
+							</script>
+						</div>
+					</tr>
+					<!-- Table with relevant stats-->
+					<br>
+					<p> Relevant statistics: </p>
+					<tr>
+						<td>Covariate</td>
+						<td>Effect size</td>
+						<td>p-value</td>
+						<td>Significant</td>
+					</tr>
+					{% for row in the_data[0] %}
+				    <tr>
+						<td>{{ row[0] }}</td>
+				        <td>{{ "%.4g"|format(row[1]|float) }}</td>
+				    	<td>{{ "%.4g"|format(row[2]|float) }}</td>
+						<td>{{ row[3] }}</td>
+				    </tr>
+					{% endfor %}
+				</table>
+
+			</th>
+			<!-- Second entry: Geography -->
+			<th>
+				<h3>Geographical distribution</h3>
+				<table>
+					<tr>
+						<div id="vis2">
+							<script>
+								var spec2 = {{ the_charts[1] | safe }};
+								vegaEmbed("#vis2", spec2);
+							</script>
+						</div>
+					</tr>
+					<!-- Table with relevant stats-->
+					<br>
+					<p> First available year: {{ the_data[1][0][3] }}</p>
+					<p> Last available year: {{ the_data[1][0][5] }}</p>
+					<p> Displaying top 5 and bottom 5 states for the last year: </p>
+					<tr>
+						<td>State</td>
+						<td>Total change (residual)</td>
+						<td>Average, {{ the_data[1][0][3] }}</td>
+						<td>Average, {{ the_data[1][0][5] }}</td>
+					</tr>
+					{% for row in the_data[1] %}
+				    <tr>
+						<td>{{ row[0] }}</td>
+				        <td>{{ "%.4g"|format(row[1]|float) }}</td>
+				    	<td>{{ "%.4g"|format(row[2]|float) }}</td>
+						<td>{{ "%.4g"|format(row[4]|float) }}</td>
+				    </tr>
+					{% endfor %}
+				</table>
+			</th>
+		</tr>
+		<!-- Second row -->
+		<tr>
+			<!-- First entry: Public policy aggregate -->
+			<th>
+				<h3>Public Policy aggregate</h3>
+				<table>
+					<tr>
+						<div id="vis3">
+							<script>
+								var spec3 = {{ the_charts[2] | safe }};
+								vegaEmbed("#vis3", spec3);
+							</script>
+						</div>
+					</tr>
+					<!-- Table with relevant stats-->
+					<br>
+					<p>Relevant statistics: </p>
+					<tr>
+						<td>State policy</td>
+						<td>Effect size</td>
+						<td>p-value</td>
+						<td>Significant</td>
+					</tr>
+					{% for row in the_data[2] %}
+					<tr>
+						<td>{{ row[0] }}</td>
+				        <td>{{ "%.4g"|format(row[1]|float) }}</td>
+				    	<td>{{ "%.4g"|format(row[2]|float) }}</td>
+						<td>{{ row[3] }}</td>
+					</tr>
+					{% endfor %}
+				</table>
+			</th>
+			<!-- Second entry: Public policy time series -->
+			<th>
+				<h3>Public Policy causal inference (time series)</h3>
+				<table>
+					<tr>
+						<div id="vis4">
+							<script>
+								var spec4 = {{ the_charts[3] | safe }};
+								vegaEmbed("#vis4", spec4);
+							</script>
+						</div>
+					</tr>
+					<!-- Table with relevant stats-->
+					<br>
+					<p> Plotted in blue: behavioral risk</p>
+					<p> Plotted in green: relevant state policy</p>
+					<p> Glossary: aunempi - unemployment spending, aedpi - education spending</p>
+					<p> aesapi - employment security spending, cwine - wine taxes</p>
+					<tr>
+						<td>State policy</td>
+						<td>Number of cases</td>
+						<td>Strongest state</td>
+						<td>p-value</td>
+					</tr>
+					{% for row in the_data[3] %}
+					<tr>
+						<td>{{ row[0] }}</td>
+				        <td>{{ row[1] }}</td>
+				    	<td>{{ row[2] }}</td>
+						<td>{{ "%.4g"|format(row[3]|float) }}</td>
+					</tr>
+					{% endfor %}
+				</table>
+			</th>
+		</tr>
+	</table>
+
+<!-- POSTing to this method triggers /display, which corresponds to do_search() function in the webapp code -->
+<!-- <form method='POST' action='/display'> -->
+<!-- 	<table>
+		<p>Use this form to submit a search request:</p>
+		<tr>
+			<td>Ticker:</td>
+			<td><input name='ticker' type='TEXT' width='60', value='GOOG'></td>
+		</tr>
+		<tr>
+			<td>Start date (YYYY-MM-DD):</td>
+			<td><input name='startdate' type='TEXT' width='60', value='2019-12-21'></td>
+		</tr>
+		<tr>
+			<td>End date (YYYY-MM-DD):</td>
+			<td><input name='enddate' type='TEXT' width='60', value='2021-03-19'></td>
+		</tr>
+	</table>
+	<p>When you're ready, click this button:</p>
+	<p><input value='Do it!' type='SUBMIT'></p> -->
+<!-- </form> -->
+
+{% endblock %}

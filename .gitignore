@@ -1,2 +1,5 @@
 .env
 __pycache__
+flask_app/data
+/venv
+/data

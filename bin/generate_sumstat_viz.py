@@ -356,19 +356,20 @@ def save_ts_tbl_viz(data_dict):
                 break
         state = row[2]
         sub_tbl = pivot_table.query(f'state_abbr == "{state}"')[['year', dep_variable, var_target]]
-        TS_chart = make_ts_plot(sub_tbl, var, var_target, variable_desc[var])
+        TS_chart = make_ts_plot(sub_tbl, var, var_target, variable_desc[var], state)
         TS_chart.save(proj_dir + 'TSDB/' + var + '_' + str(n_samp) + '_TSCHART.json')
 
     else:
         print('No time series analyses available!')
 
 
-def make_ts_plot(sub_tbl, dep_variable, var_target, title):
+def make_ts_plot(sub_tbl, dep_variable, var_target, title, state):
     base = alt.Chart(sub_tbl).encode(
         alt.X('year:O', title='Year')
     ).properties(
         height=300,
-        width=450
+        width=450,
+        title='Plotting ' + dep_variable + ' and ' + var_target + ' for ' + state + ':'
     )
     l1 = base.mark_line(color='#57A44C').encode(
         alt.Y(f'{var_target}:Q', scale=alt.Scale(domain=[min(sub_tbl[var_target]), max(sub_tbl[var_target])])),

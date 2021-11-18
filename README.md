@@ -42,10 +42,16 @@ https://github.com/bjo/TDI_capstone_webapp/blob/main/notebooks/Capstone%20projec
 
 ## Notable findings
 This project highlights how socioeconomic and demographic factors, such as income as education,
-are highly protective when it comes to common behavioral risks. Meanwhile, it also shows that despite
-worsening health trends overall, we are able to observe that this trend is reversed in certain states.
+are highly protective when it comes to common behavioral risks. Meanwhile, we can see that various
+health-related behavioral risks are improving, notably pneumonia vaccination and healthcare coverage.
+These improving health trends are more pronounced in certain regions (such as Puerto Rico), but 
+sometimes they are reversed as well.
 We can also see that simple correlational studies between behavioral risks and state policies are often
-confounded, as expected. Perhaps the most notable finding is that the state policies most strongly
-associated causally (with time-series analysis) are not necessary policies that are directly related to the 
-behavioral risk (such as alcohol taxes for binge drinking), but rather state policies that affect the 
-general population (such as unemployment spending, education spending, etc.)
+confounded, as expected. For an example, look at the relationship between lack of exercise and
+anecpi (miscellaneous spending). There is no clear reason why these should be correlated, and 
+the confounding appears to come from the fact that certain states (most notably, Alaska), have high rates of both,
+confounding this study (even after correcting for state-specific effects in the behavioral risk).
+Perhaps the most notable finding is that the state policies that are causally most strongly
+associated (according to time-series analysis using Granger causality) are not necessary policies that
+are directly related to the behavioral risk (such as alcohol taxes for binge drinking), 
+but rather state policies that affect the general population more (such as unemployment spending, education spending, etc.)

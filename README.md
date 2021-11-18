@@ -9,16 +9,16 @@ https://projectmenrva.herokuapp.com/
 The main goal of Project Menrva is to identify the underlying mechanism of common behavioral risks,
 such as smoking, binge drinking, lack of exercise, lack of vaccination, etc.
 I gathered datasets from the [CDC](https://www.cdc.gov/brfss/) for behavioral risks and 
-related covariates, and from and [MSU](https://cspp.ippsr.msu.edu/) for public policies.
+related covariates, and from [MSU](https://cspp.ippsr.msu.edu/) for public policies.
 
-The Project Menrva dashboard has four portions:
-1. Highlight the relationship between behavioral risks and common covariates (such as income, education, etc.)
-2. Geographic understanding of prevalence of behavioral risks, and how they changed over time
+The Project Menrva dashboard has visualizations and relevant statistics on four categories:
+1. Highlight the relationship between behavioral risks and common covariates (such as income, education, etc.).
+2. Geographic understanding of prevalence of behavioral risks, and how they changed over time.
 3. State public policies that are correlated with the behavioral risks.
-4. Causal inference with time-series data using Granger Causality.
+4. Causal inference with time-series data for state policies affecting behavioral risk (using Granger Causality).
 
-With these understandings, we want to be able to pinpoint opportunities to influence populations
-to engage less in negative behaviors.
+With better understanding of these behavioral risks, we want to be able to pinpoint opportunities
+to influence the U.S. population to engage less in negative behaviors.
 
 ## Skills highlight - ETL and reporting/visualization
 1. Wrangled ~15G of data, including 8.2M survey responses across 21 years. (Extract)

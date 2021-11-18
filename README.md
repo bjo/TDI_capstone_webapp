@@ -29,10 +29,16 @@ numpy, pandas, scikit-learn, statsmodels (Transform)
 4. Development of a flask webapp and deployment with heroku (Reporting and visualization)
 
 
-## Notebooks
-1. Notes for data preprocessing pipelines for BRF and state policy data: https://github.com/bjo/TDI_capstone_webapp/blob/main/notebooks/Project_Menrva_preprocessing.ipynb
-2. Notes for main data pipelines for statistical analysis and visualization: https://github.com/bjo/TDI_capstone_webapp/blob/main/notebooks/Project_Menrva_generate_sumstat_viz.ipynb
-3. Notes for flask app, writing to DB and loading data from DB: https://github.com/bjo/TDI_capstone_webapp/blob/main/notebooks/Capstone%20project%20dev%20notes.ipynb
+## Notebooks and scripts
+- Notes for data preprocessing pipelines for BRF and state policy data: 
+https://github.com/bjo/TDI_capstone_webapp/blob/main/notebooks/Project_Menrva_preprocessing.ipynb
+(also refer to https://github.com/bjo/TDI_capstone_webapp/blob/main/bin/preprocessing_scripts.py)
+- Notes for main data pipelines for statistical analysis and visualization:
+https://github.com/bjo/TDI_capstone_webapp/blob/main/notebooks/Project_Menrva_generate_sumstat_viz.ipynb
+(also refer to https://github.com/bjo/TDI_capstone_webapp/blob/main/bin/generate_sumstat_viz.py)
+- Notes for flask app, writing to DB and loading data from DB: 
+https://github.com/bjo/TDI_capstone_webapp/blob/main/notebooks/Capstone%20project%20dev%20notes.ipynb
+(also refer to https://github.com/bjo/TDI_capstone_webapp/blob/main/bin/create_table.py)
 
 ## Notable findings
 This project highlights how socioeconomic and demographic factors, such as income as education,
